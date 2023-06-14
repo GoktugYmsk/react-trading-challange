@@ -1,10 +1,22 @@
-.content-container{
+.content-container {
     display: flex;
-    grid-template-columns: repeat(3, 1fr); 
-    border: dashed 2px black;
-    height: 300px;
 
-    .product-title{
+    border: dashed 2px black;
+    height: auto;
+
+    img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .product-list {
         display: flex;
+        grid-template-rows: repeat(3, 1fr);
+
+        .product-box {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+        }
     }
 }
