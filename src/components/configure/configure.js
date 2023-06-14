@@ -1,19 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    input: '',
+    categories: '',
 }
 
 export const configure = createSlice({
     name: 'control',
     initialState,
     reducers: {
-        setInput: (state, action) => {
-            state.input = action.payload;
+        setCategories: (state, action) => {
+            state.categories = action.payload;
         },
     }
 })
 
-export const {setInput } = configure.actions
+export const {setCategories } = configure.actions
 
 export default configure.reducer

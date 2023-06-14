@@ -1,3 +1,10 @@
 .content-container{
+    display: flex;
+    grid-template-columns: repeat(3, 1fr); 
     border: dashed 2px black;
+    height: 300px;
+
+    .product-title{
+        display: flex;
+    }
 }
