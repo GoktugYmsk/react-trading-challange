@@ -4,13 +4,13 @@ import { HiOutlineSearch } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
 import { setInputFilter } from '../configure/configure';
 import { FaShoppingBasket } from 'react-icons/fa';
-import { setProductBasket } from '../configure/configure';
+import { setActive } from '../configure/configure';
 import './index.scss'
 
 function Header() {
   const inputFilter = useSelector((state) => state.filterProducts.inputFilter);
   const count = useSelector((state) => state.basketCount.count);
-  const productBasket = useSelector((state) => state.productBasket.productBasket);
+  const active = useSelector((state) => state.activeBasket.active);
 
   const dispatch = useDispatch()
 
@@ -18,12 +18,15 @@ function Header() {
     dispatch(setInputFilter(e))
   }
 
-
   const logo =
     'https://uploads-ssl.webflow.com/605c9d764f1ef938a009ac98/61e01bfbdd8632a72962edc2_Pinsoft_Yatay_Logo_mavi-for%20animation.svg';
 
+  const handleBasketClick = () => {
+    dispatch(setActive(true))
+  }
+
   return (
-    <div className='header-container' >
+    <div className={`header-container ${active ? 'container-opacity' : ''}`} >
       <div className='header-container__top' >
         <p>Pinsoftta satış yapın</p>
         <p>100 TL Üzeri Alışverişe Kargo Bedava !</p>
@@ -50,8 +53,8 @@ function Header() {
           </span>
         </div>
         <div className='header-container__basket-group' >
-          <div  className="header__basket">
-            <p className="header__amount">{count}</p>
+          <div onClick={handleBasketClick} className="header__basket">
+            <p className="header__count">{count}</p>
             <FaShoppingBasket className="header__icon" />
           </div>
         </div>

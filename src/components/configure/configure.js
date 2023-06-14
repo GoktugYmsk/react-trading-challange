@@ -6,6 +6,7 @@ const initialState = {
     inputFilter: '',
     count: 0,
     productBasket: [],
+    active: false,
 }
 
 export const configure = createSlice({
@@ -27,9 +28,12 @@ export const configure = createSlice({
         setProductBasket: (state, action) => {
             state.productBasket = action.payload;
         },
+        setActive: (state, action) => {
+            state.active = action.payload;
+        },
     }
 })
 
-export const { setCategories, setSelectedCategory, setInputFilter, setCount,setProductBasket } = configure.actions
+export const { setCategories, setSelectedCategory, setInputFilter, setCount,setProductBasket,setActive } = configure.actions
 
 export default configure.reducer

@@ -8,6 +8,7 @@ import './index.scss';
 function SideBar() {
   const selectedCategory = useSelector((state) => state.optionCategory.selectedCategory);
   const uniqueCategories = Array.from(new Set(data.map(item => item.category)));
+  const active = useSelector((state) => state.activeBasket.active);
 
   const dispatch = useDispatch()
 
@@ -16,14 +17,16 @@ function SideBar() {
   };
 
   return (
-    <div className="sideBar-container">
+    <div className={`sideBar-container  ${active ? 'container-opacity' : ''}`}> 
       {uniqueCategories.map((category, index) => (
         <div
           onClick={() => handleClickCategory(category)}
           key={index}
           className={selectedCategory === category ? 'active' : ''}
         >
-          {category}
+          <p>
+            {category}
+          </p>
         </div>
       ))}
     </div>

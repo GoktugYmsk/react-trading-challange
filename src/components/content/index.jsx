@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Toast from 'react-bootstrap/Toast';
 import { setProductBasket } from '../configure/configure';
 import { setCount } from '../configure/configure';
 import data from '../../assets/data';
@@ -11,7 +12,10 @@ function Content() {
   const productBasket = useSelector((state) => state.productBasket.productBasket);
   const count = useSelector((state) => state.basketCount.count);
 
+  const [popup, setPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState()
   const [selectedProductList, setSelectedProductList] = useState([]);
+  const active = useSelector((state) => state.activeBasket.active);
 
   const dispatch = useDispatch()
 
@@ -33,21 +37,17 @@ function Content() {
     dispatch(setProductBasket(sendSelectedProducts))
     dispatch(setCount(increaseCount))
     setSelectedProductList((prevList) => [...prevList, product]);
+    setPopupMessage('Product successfully added to cart')
+    setPopup(true)
   };
-  const removeToBasket = (product) => {
-    const increaseCount = count + 1;
-    const sendSelectedProducts = [...productBasket, product]
-    dispatch(setProductBasket(sendSelectedProducts))
-    dispatch(setCount(increaseCount))
-    setSelectedProductList((prevList) => [...prevList, product]);
-  }
 
   const removeFromBasket = (product) => {
-    const increaseCount = count - 1;
-    const sendSelectedProducts = [...productBasket, product]
+    const decreaseCount = count - 1;
+    const sendSelectedProducts = productBasket.filter((item) => item.title !== product.title);
     dispatch(setProductBasket(sendSelectedProducts))
-    dispatch(setCount(increaseCount))
+    dispatch(setCount(decreaseCount))
     setSelectedProductList((prevList) => [...prevList, product]);
+    setPopupMessage('Product successfully removed to cart')
     setSelectedProductList((prevList) => prevList.filter((item) => item.title !== product.title));
   };
 
@@ -56,7 +56,7 @@ function Content() {
   };
 
   return (
-    <div className="content-container">
+    <div className={`content-container ${active ? 'container-opacity' : ''}`}>
       <div className="product-list">
         {filteredList.map((product, key) => (
           <div key={key}>
@@ -72,6 +72,13 @@ function Content() {
           </div>
         ))}
       </div>
+      {popup && (
+        <div className="toast-container">
+          <Toast onClose={() => setPopup(false)} show={popup} delay={3000} autohide>
+            <Toast.Body>{popupMessage}</Toast.Body>
+          </Toast>
+        </div>
+      )}
     </div>
   );
 }

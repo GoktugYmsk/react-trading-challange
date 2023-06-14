@@ -8,5 +8,6 @@ export const store = configureStore({
         filterProducts:configure,
         basketCount:configure,
         productBasket: configure,
+        activeBasket:configure,
     },
 })

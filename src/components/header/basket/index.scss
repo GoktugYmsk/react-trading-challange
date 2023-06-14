@@ -1,0 +1,32 @@
+.container-basket {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 600px;
+    height: 100vh;
+    padding: 20px;
+    background: white;
+
+    .basket-close{
+        margin-left: 460px;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .basket-modal__list{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        height: 220px;
+        flex-direction: column;
+
+        img{
+            width: 100px;
+            height: 100px;
+        }
+    }
+}

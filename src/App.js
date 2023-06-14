@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/header';
 import SideBar from './components/sideBar';
 import Content from './components/content';
+import Basket from './components/header/basket';
 
 import './App.css';
 
@@ -28,6 +29,7 @@ function App() {
           <Content />
         </Col>
       </Row>
+      <Basket/>
     </div>
   );
 }
