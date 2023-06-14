@@ -1,15 +1,20 @@
 import React from 'react';
 
+import { Row, Col } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/header';
 import SideBar from './components/sideBar';
 import Content from './components/content';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Col } from 'react-bootstrap';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
+      <Helmet>
+        <title>Pinsoft Shopping</title>
+      </Helmet>
       <Row>
         <Col sm={12} md={12} lg={12} >
           <Header />
