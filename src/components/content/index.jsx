@@ -12,13 +12,19 @@ function Content() {
 
   return (
     <div className='content-container' >
-      {list.map((product, key) => {
-        return (
-          <div key={key}>
-            <p className='product-title' >{product.title}</p>
-          </div>
-        )
-      })}
+      <div className='product-list' >
+        {list.map((product, key) => {
+          return (
+            <div key={key}>
+
+              <div className='product-box' >
+                <img src={product.image} />
+                <p className='product-title' >{product.title}</p>
+              </div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
