@@ -14,21 +14,20 @@ function Basket() {
   const [basketCount, setBasketCount] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const totalQuantity = Object.values(basketCount).reduce((sum, quantity) => sum + parseInt(quantity), 0);
-
+  
   const dispatch = useDispatch();
-
+  
   const handleCloseBasket = () => {
     dispatch(setActive(false));
   };
-
+  
   const handleCountChange = (productId, value) => {
     setBasketCount((prevCount) => ({
       ...prevCount,
       [productId]: value,
     }));
   };
-
+  
   const handleDeleteProduct = (productId) => {
     const deleteProduct = productBasket.filter((product) => product.id !== productId);
     const updatedBasketCount = { ...basketCount };
@@ -39,21 +38,21 @@ function Basket() {
     dispatch(setProductBasket(deleteProduct));
     dispatch(setCount(count - 1));
   };
-
+  
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.keyCode === 27) {
         dispatch(setActive(false));
       }
     };
-
+    
     document.addEventListener('keydown', handleKeyDown);
-
+    
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
-
+  
   useEffect(() => {
     if (productBasket.length > 0) {
       productBasket.forEach((product) => {
@@ -66,7 +65,7 @@ function Basket() {
       });
     }
   }, [productBasket]);
-
+  
   useEffect(() => {
     let total = 0;
     productBasket.forEach((product) => {
@@ -76,7 +75,9 @@ function Basket() {
     });
     setTotalPrice(total);
   }, [basketCount, productBasket]);
-
+  
+  const totalQuantity = Object.values(basketCount).reduce((sum, quantity) => sum + parseInt(quantity), 0);
+  
   return (
     <>
       {active && (
