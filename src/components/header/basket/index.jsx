@@ -13,6 +13,8 @@ function Basket() {
 
   const [basketCount, setBasketCount] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
+  
+  const totalQuantity = Object.values(basketCount).reduce((sum, quantity) => sum + parseInt(quantity), 0);
 
   const dispatch = useDispatch();
 
@@ -28,12 +30,16 @@ function Basket() {
   };
 
   const handleDeleteProduct = (productId) => {
-    const deleteProduct = productBasket.filter(
-      (product) => product.id !== productId
-    );
+    const deleteProduct = productBasket.filter((product) => product.id !== productId);
+    const updatedBasketCount = { ...basketCount };
+    if (updatedBasketCount[productId]) {
+      delete updatedBasketCount[productId];
+      setBasketCount(updatedBasketCount);
+    }
     dispatch(setProductBasket(deleteProduct));
     dispatch(setCount(count - 1));
   };
+  
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -72,7 +78,7 @@ function Basket() {
     setTotalPrice(total);
   }, [basketCount, productBasket]);
 
-  const totalQuantity = Object.values(basketCount).reduce((sum, quantity) => sum + parseInt(quantity), 0);
+  
 
   return (
     <>
@@ -87,25 +93,31 @@ function Basket() {
               <div className="basket-modal__box">
                 {productBasket.map((product, index) => (
                   <div key={index} className='basket-modal__list'>
-                    <img src={product.image} alt={product.title} />
-                    <p>{product.title}</p>
-                    <p>adet: {basketCount[product.id] || 0}</p>
-                    <p>{product.price} $</p>
+                    <div className='basket-modal__products' >
+                      <div className='basket-modal__products-image' >
+                        <img src={product.image} alt={product.title} />
+                      </div>
+                      <div className='basket-modal__products-info' >
+                        <p>{product.title}</p>
+                        <p>adet: {basketCount[product.id] || 0}</p>
+                        <p>{product.price} $</p>
+                      </div>
+                      <RiDeleteBin5Fill
+                        className="basket-modal__list-icon"
+                        onClick={() => handleDeleteProduct(product.id)}
+                      />
+                    </div>
                     <input
                       type="number"
                       min="0"
                       value={basketCount[product.id] || 0}
                       onChange={(e) => handleCountChange(product.id, e.target.value)}
                     />
-                    <RiDeleteBin5Fill
-                      className="basket-modal__list-icon"
-                      onClick={() => handleDeleteProduct(product.id)}
-                    />
                   </div>
                 ))}
               </div>
             ) : (
-              <p>Your cart is empty</p>
+              <p className='basket-empty' >Your cart is empty</p>
             )}
           </div>
           <div className='basket__total-price' >

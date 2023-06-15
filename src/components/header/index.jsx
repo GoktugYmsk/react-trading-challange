@@ -6,12 +6,16 @@ import { setInputFilter } from '../configure/configure';
 import { FaShoppingBasket } from 'react-icons/fa';
 import { setActive } from '../configure/configure';
 import './index.scss'
+import { useRef } from 'react';
+import { useState } from 'react';
 
 function Header() {
   const inputFilter = useSelector((state) => state.filterProducts.inputFilter);
   const count = useSelector((state) => state.basketCount.count);
   const active = useSelector((state) => state.activeBasket.active);
 
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const inputRef = useRef(null);
   const dispatch = useDispatch()
 
   const handleChange = (e) => {
@@ -24,6 +28,12 @@ function Header() {
   const handleBasketClick = () => {
     dispatch(setActive(true))
   }
+
+
+  const handleIconClick = () => {
+    setIsInputFocused(true);
+    inputRef.current.focus();
+  };
 
   return (
     <div className={`header-container ${active ? 'container-opacity' : ''}`} >
@@ -42,6 +52,7 @@ function Header() {
         <div className="header-container__input-group">
           <input
             placeholder="Search"
+            ref={inputRef}
             type="text"
             value={inputFilter}
             className="form-control"
@@ -49,7 +60,7 @@ function Header() {
             aria-label="Dollar amount (with dot and two decimal places)"
           />
           <span className="input-group-text">
-            <HiOutlineSearch />
+            <HiOutlineSearch onClick={handleIconClick} />
           </span>
         </div>
         <div className='header-container__basket-group' >

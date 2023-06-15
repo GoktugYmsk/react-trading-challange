@@ -51,6 +51,14 @@ function Content() {
     setSelectedProductList((prevList) => prevList.filter((item) => item.title !== product.title));
   };
 
+  useEffect(() => {
+    if (active) {
+      document.body.style.overflow = 'hidden'; // Kaydırmayı engelle
+    } else {
+      document.body.style.overflow = 'auto'; // Kaydırmayı etkinleştir
+    }
+  }, [active]);
+
   const isProductSelected = (product) => {
     return selectedProductList.some((item) => item.title === product.title);
   };

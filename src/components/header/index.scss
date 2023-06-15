@@ -27,6 +27,7 @@
 
     .header-container__lower {
         display: flex;
+        background: white;
         align-items: center;
         justify-content: space-around;
         width: 100%;
@@ -36,13 +37,17 @@
             width: 200px;
             height: 60px;
         }
+        .header-container__input-group{
+            margin-left: 50px;
+            display: flex;
+            input{
+                width: 600px;
+            }
+        }
 
     }
 
     .header-container__basket-group {
-        position: relative;
-        left: 120px;
-
         .header__basket {
             display: flex;
             align-items: center;
