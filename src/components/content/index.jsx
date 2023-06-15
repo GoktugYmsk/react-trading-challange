@@ -11,6 +11,7 @@ function Content() {
   const inputFilter = useSelector((state) => state.filterProducts.inputFilter);
   const productBasket = useSelector((state) => state.productBasket.productBasket);
   const count = useSelector((state) => state.basketCount.count);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const [popup, setPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState()
@@ -53,9 +54,9 @@ function Content() {
 
   useEffect(() => {
     if (active) {
-      document.body.style.overflow = 'hidden'; // Kaydırmayı engelle
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'auto'; // Kaydırmayı etkinleştir
+      document.body.style.overflow = 'auto';
     }
   }, [active]);
 
@@ -63,19 +64,39 @@ function Content() {
     return selectedProductList.some((item) => item.title === product.title);
   };
 
+
+  const handleMouseEnter = (index) => {
+    setHoveredIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
+
   return (
     <div className={`content-container ${active ? 'container-opacity' : ''}`}>
       <div className="product-list">
-        {filteredList.map((product, key) => (
-          <div key={key}>
-            <div className="product-box">
-              <img src={product.image} alt={product.title} />
-              <p className="product-title">{product.title}</p>
-              {isProductSelected(product) ? (
-                <button onClick={() => removeFromBasket(product)}>Remove from basket</button>
-              ) : (
-                <button onClick={() => addToBasket(product)}>Add to basket</button>
-              )}
+        {filteredList.map((product, index) => (
+          <div key={index}>
+            <div
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+              className="product-box">
+              <div className='product-box__topInfo' >
+                <img src={product.image} alt={product.title} />
+                <p className="product-title">{product.title}</p>
+              </div>
+              {hoveredIndex === index &&
+                (isProductSelected(product) ? (
+                  <button className='product-remove-button' onClick={() => removeFromBasket(product)}>
+                    <p>Remove from basket</p>
+                  </button>
+                ) : (
+                  <button className='product-add-button' onClick={() => addToBasket(product)}>
+                    <p>Add to basket</p>
+                  </button>
+                ))
+              }
             </div>
           </div>
         ))}
