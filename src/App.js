@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Row, Col } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Header from './components/header';
 import SideBar from './components/sideBar';
 import Content from './components/content';
@@ -29,7 +29,7 @@ function App() {
           <Content />
         </Col>
       </Row>
-      <Basket/>
+      <Basket />
     </div>
   );
 }

@@ -34,6 +34,6 @@ export const configure = createSlice({
     }
 })
 
-export const { setCategories, setSelectedCategory, setInputFilter, setCount,setProductBasket,setActive } = configure.actions
+export const { setCategories, setSelectedCategory, setInputFilter, setCount, setProductBasket, setActive } = configure.actions
 
 export default configure.reducer

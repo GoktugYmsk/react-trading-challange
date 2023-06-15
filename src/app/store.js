@@ -5,9 +5,9 @@ export const store = configureStore({
     reducer: {
         category: configure,
         optionCategory: configure,
-        filterProducts:configure,
-        basketCount:configure,
+        filterProducts: configure,
+        basketCount: configure,
         productBasket: configure,
-        activeBasket:configure,
+        activeBasket: configure,
     },
 })

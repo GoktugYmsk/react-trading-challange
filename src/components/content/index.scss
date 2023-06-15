@@ -1,6 +1,5 @@
 .content-container {
   display: flex;
-  border: dashed 2px black;
   height: auto;
 
   .product-list {
@@ -33,6 +32,12 @@
         p {
           margin-top: 30px;
         }
+
+        .product-box__topInfo-price {
+          position: relative;
+          left: 90px;
+          bottom: 30px;
+        }
       }
     }
 
@@ -40,7 +45,7 @@
       display: flex;
       align-items: center;
       position: relative;
-      bottom: 20px;
+      bottom: 40px;
       height: 40px;
       color: white;
       border-radius: 20px;

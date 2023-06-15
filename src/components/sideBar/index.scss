@@ -3,12 +3,37 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-top: none !important;
+    border-left: none !important;
+    border-bottom: none !important;
     border: dashed 2px black;
 
     p {
         cursor: pointer;
     }
-    
+
+    .dropdown-header {
+        display: flex;
+        align-items: center;
+
+
+        .dropdown-header__h2 {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+
+            p {
+                margin-left: 30px;
+            }
+        }
+
+        .dropdown-header__open {
+
+            font-size: 40px;
+
+        }
+    }
+
 }
 
 .container-opacity {

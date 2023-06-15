@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { HiOutlineSearch } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
-import { setInputFilter } from '../configure/configure';
+
+import { HiOutlineSearch } from 'react-icons/hi';
 import { FaShoppingBasket } from 'react-icons/fa';
-import { setActive } from '../configure/configure';
+
+import { setInputFilter,setActive  } from '../configure/configure';
 import './index.scss';
 
 function Header() {
@@ -11,9 +12,11 @@ function Header() {
   const count = useSelector((state) => state.basketCount.count);
   const active = useSelector((state) => state.activeBasket.active);
 
-  const [isInputFocused, setIsInputFocused] = useState(false);
   const inputRef = useRef(null);
+
   const dispatch = useDispatch();
+  
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handleChange = (e) => {
     dispatch(setInputFilter(e));
@@ -51,13 +54,15 @@ function Header() {
   return (
     <div className={`header-container ${active ? 'container-opacity' : ''}`}>
       <div className="header-container__top">
-        <p>Pinsoftta satış yapın</p>
-        <p>100 TL Üzeri Alışverişe Kargo Bedava !</p>
+        <p>Sell ​​on Pinsoft</p>
+        <p>Free Shipping for Shopping Over 100 TL!</p>
         <div className="header-container__top-rigth__info">
-          <p>Kampanyalar</p>
-          <p>Sipariş Takibi</p>
-          <p>Yardım ve Destek</p>
-          <p>Markalar</p>
+          <ul>
+            <li>Campaigns</li>
+            <li>Order Tracking</li>
+            <li>Help and Support</li>
+            <li>Brands</li>
+          </ul>
         </div>
       </div>
       <div className="header-container__lower">

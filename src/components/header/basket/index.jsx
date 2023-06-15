@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { RiDeleteBin5Fill } from 'react-icons/ri';
-import { setActive } from '../../configure/configure';
-import { setCount } from '../../configure/configure';
-import { setProductBasket } from '../../configure/configure';
+
+import { setCount, setActive, setProductBasket } from '../../configure/configure';
 import './index.scss';
 
 function Basket() {
@@ -13,7 +13,7 @@ function Basket() {
 
   const [basketCount, setBasketCount] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
-  
+
   const totalQuantity = Object.values(basketCount).reduce((sum, quantity) => sum + parseInt(quantity), 0);
 
   const dispatch = useDispatch();
@@ -39,7 +39,6 @@ function Basket() {
     dispatch(setProductBasket(deleteProduct));
     dispatch(setCount(count - 1));
   };
-  
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -78,14 +77,12 @@ function Basket() {
     setTotalPrice(total);
   }, [basketCount, productBasket]);
 
-  
-
   return (
     <>
       {active && (
         <div className='container-basket'>
           <div className='container-basket__top'>
-            <p>Sepetim({totalQuantity} ürün)</p>
+            <p>My Basket({totalQuantity} product)</p>
             <p className='basket-close' onClick={handleCloseBasket}>X</p>
           </div>
           <div className='container-basket__box'>
@@ -121,7 +118,7 @@ function Basket() {
             )}
           </div>
           <div className='basket__total-price' >
-            <h3>Ara Toplam:</h3>
+            <h3>Subtotal:</h3>
             <h3>{parseFloat(totalPrice).toFixed(2)} $</h3>
           </div>
         </div>

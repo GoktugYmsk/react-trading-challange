@@ -16,11 +16,14 @@
         }
 
         .header-container__top-rigth__info {
-            display: flex;
+            ul {
+                display: flex;
+                margin-top: 10px;
+            }
 
-            p {
-                margin-left: 10px;
-                font-size: 10px;
+            li {
+                margin-left: 30px;
+                font-size: 12px;
             }
         }
     }
@@ -38,11 +41,17 @@
             width: 200px;
             height: 60px;
         }
-        .header-container__input-group{
+
+        .header-container__input-group {
             margin-left: 50px;
             display: flex;
-            input{
+
+            input {
                 width: 600px;
+            }
+
+            .input-group-text {
+                cursor: pointer;
             }
         }
 
@@ -92,6 +101,7 @@
 
 
 }
-.container-opacity{
+
+.container-opacity {
     opacity: 0.2;
 }
